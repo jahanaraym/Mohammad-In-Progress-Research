@@ -1,30 +1,9 @@
 ﻿const form = document.querySelector("#coauthor-form");
-const formNote = document.querySelector("#form-note");
 const config = window.COAUTHOR_FORM_CONFIG || {};
-const defaultEndpoint =
-  "https://script.google.com/macros/s/AKfycbvyTjn593ARRQ83LHHXoprxlhn0LEd7RgKl3c7tePLXWsvq7SD1mLVlreWJ9PdB1SI/exec";
-const rawEndpoint = (config.endpoint || "").trim();
-const endpoint =
-  !rawEndpoint || rawEndpoint.includes("PASTE_YOUR_GOOGLE_APPS_SCRIPT")
-    ? defaultEndpoint
-    : rawEndpoint;
+const endpoint = (config.endpoint || "").trim();
 const notifyEmail = (config.notifyEmail || "jahanaraym@vcu.edu").trim();
-const isAppsScriptEndpoint =
-  /^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/i.test(endpoint);
 
-function showNote(text, ok) {
-  if (!formNote) return;
-  if (!text) {
-    formNote.textContent = "";
-    formNote.style.display = "none";
-    return;
-  }
-  formNote.style.display = "block";
-  formNote.textContent = text;
-  formNote.style.color = ok ? "#a7f3d0" : "#fca5a5";
-}
-
-if (form && formNote) {
+if (form) {
   const frameName = "coauthor_submit_frame";
   let frame = document.querySelector('iframe[name="coauthor_submit_frame"]');
   if (!frame) {
@@ -34,54 +13,37 @@ if (form && formNote) {
     document.body.appendChild(frame);
   }
 
-  // Prefer native form submit to Apps Script web app (more reliable than fetch+CORS).
-  if (isAppsScriptEndpoint) {
-    form.action = endpoint;
-    form.method = "post";
-    form.target = frameName;
-  }
+  form.action = endpoint;
+  form.method = "post";
+  form.target = frameName;
 
   form.addEventListener("submit", (event) => {
-    showNote("", true);
-
     const picked = Array.from(
       form.querySelectorAll('input[name="contribution"]:checked')
     );
 
     if (picked.length === 0) {
-      showNote(
-        "Please select at least one contribution area: Introduction or Discussion.",
-        false
-      );
-      return;
-    }
-
-    if (!isAppsScriptEndpoint) {
       event.preventDefault();
-      showNote(
-        "Endpoint must be a Google Apps Script Web App URL ending in /exec, not a Google Sheet link.",
-        false
-      );
+      window.alert("Please select at least one contribution area: Introduction or Discussion.");
       return;
     }
-
-    // Add metadata fields for Apps Script.
-    upsertHidden(form, "notify_email", notifyEmail);
-    upsertHidden(form, "source_page", window.location.href);
-    upsertHidden(form, "user_agent", navigator.userAgent);
 
     const projectSelect = form.querySelector("#project");
     const selectedOption =
       projectSelect && projectSelect.options[projectSelect.selectedIndex];
+
+    upsertHidden(form, "project_key", form.project.value);
     upsertHidden(
       form,
       "project_title",
       selectedOption ? selectedOption.text : form.project.value
     );
-    upsertHidden(form, "project_key", form.project.value);
+    upsertHidden(form, "notify_email", notifyEmail);
+    upsertHidden(form, "source_page", window.location.href);
+    upsertHidden(form, "user_agent", navigator.userAgent);
 
-    // Let native submit proceed to hidden iframe, then clear form quietly.
-    setTimeout(() => form.reset(), 300);
+    // Keep user flow clean; submit in hidden iframe and reset shortly after.
+    setTimeout(() => form.reset(), 250);
   });
 }
 
