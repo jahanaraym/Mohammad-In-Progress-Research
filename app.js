@@ -82,8 +82,11 @@ if (form && formNote) {
     );
     upsertHidden(form, "project_key", form.project.value);
 
-    // Let native submit proceed to hidden iframe, then clear form quietly.
-    setTimeout(() => form.reset(), 300);
+    // Let native submit proceed to hidden iframe, then show thank-you popup.
+    setTimeout(() => {
+      window.alert("Thanks for your submission, I will get back to soon, Mohammad");
+      form.reset();
+    }, 300);
   });
 }
 
