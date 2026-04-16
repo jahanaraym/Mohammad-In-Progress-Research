@@ -24,7 +24,7 @@ function showNote(text, ok) {
   formNote.style.color = ok ? "#a7f3d0" : "#fca5a5";
 }
 
-if (form && formNote) {
+if (form) {
   const frameName = "coauthor_submit_frame";
   let frame = document.querySelector('iframe[name="coauthor_submit_frame"]');
   if (!frame) {
@@ -49,19 +49,14 @@ if (form && formNote) {
     );
 
     if (picked.length === 0) {
-      showNote(
-        "Please select at least one contribution area: Introduction or Discussion.",
-        false
-      );
+      event.preventDefault();
+      window.alert("Please select at least one contribution area: Introduction or Discussion.");
       return;
     }
 
     if (!isAppsScriptEndpoint) {
       event.preventDefault();
-      showNote(
-        "Endpoint must be a Google Apps Script Web App URL ending in /exec, not a Google Sheet link.",
-        false
-      );
+      // Keep this hidden from submitters; fail silently and avoid technical UI messages.
       return;
     }
 
