@@ -1,0 +1,88 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mohammad Jahanaray</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="page-wrap">
+    <section class="intro-card">
+      <div class="intro-text">
+        <img class="vcu-logo" src="./vcu-logo.png" alt="VCU logo">
+        <p class="eyebrow">Personal Profile</p>
+        <h1>Mohammad Jahanaray</h1>
+        <p class="meta"><strong>Education:</strong> Ph.D. Student in Educational Psychology</p>
+        <p class="meta"><strong>University:</strong> Virginia Commonwealth University</p>
+        <p class="meta"><strong>Email:</strong> <a href="mailto:jahanaraym@vcu.edu">jahanaraym@vcu.edu</a></p>
+      </div>
+      <div class="photo-wrap">
+        <img src="./mohammad-jahanaray.jpg" alt="Portrait of Mohammad Jahanaray">
+      </div>
+    </section>
+
+    <section class="projects">
+      <h2>In-Progress Projects</h2>
+
+      <article class="project-item">
+        <h3>Risk and Protective Factors for Bullying (YRBS 2023)</h3>
+        <p>Path analysis of national adolescent data to test how ACEs and obesity relate to bullying through executive function, physical activity, and team participation.</p>
+        <p class="prelim"><strong>Preliminary results:</strong> The SEM showed acceptable fit (CFI = 0.89, TLI = 0.948, RMSEA = 0.026). Executive function was the strongest predictor of bullying, and ACEs showed a significant indirect pathway through executive function.</p>
+      </article>
+
+      <article class="project-item">
+        <h3>Single Parenthood and School Readiness in Virginia</h3>
+        <p>Ecological mediation study assessing whether county-level child opportunity explains the link between single-parent household prevalence and school readiness outcomes.</p>
+        <p class="prelim"><strong>Preliminary results:</strong> A one standard deviation increase in single-parent prevalence was associated with about a 3% drop in school readiness. Mediation analyses suggest around 40% of this negative association is explained by lower child opportunity.</p>
+      </article>
+
+      <article class="project-item">
+        <h3>Modeling Growth in Executive Functioning</h3>
+        <p>Longitudinal latent growth modeling (2008-2025) examining how changes in executive function predict later emotional, behavioral, and health-related outcomes.</p>
+        <p class="prelim"><strong>Preliminary results:</strong> Three-wave data harmonization and composite construction are complete, and initial growth models show clear between-person differences in baseline executive functioning. Early model runs suggest trajectory differences are likely meaningful for downstream emotional and behavioral outcomes.</p>
+      </article>
+    </section>
+
+    <section class="collab">
+      <h2>Interested in Co-Authoring?</h2>
+      <p class="collab-copy">If you want to join one of these projects as a co-author, select a project and tell me where you want to contribute.</p>
+
+      <form id="coauthor-form" class="coauthor-form" action="#" method="post">
+        <label for="project">Project</label>
+        <select id="project" name="project" required>
+          <option value="">Select a project</option>
+          <option value="bullying">Risk and Protective Factors for Bullying (YRBS 2023)</option>
+          <option value="single-parenthood">Single Parenthood and School Readiness in Virginia</option>
+          <option value="ef-growth">Modeling Growth in Executive Functioning</option>
+        </select>
+
+        <label for="full-name">Your name</label>
+        <input id="full-name" name="full_name" type="text" required>
+
+        <label for="email">Your email</label>
+        <input id="email" name="email" type="email" required>
+
+        <fieldset>
+          <legend>Contribution area</legend>
+          <label class="check-option"><input type="checkbox" name="contribution" value="intro"> Writing Introduction</label>
+          <label class="check-option"><input type="checkbox" name="contribution" value="discussion"> Writing Discussion</label>
+        </fieldset>
+
+        <button type="submit">Submit Interest</button>
+        <p id="form-note" class="form-note" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+  <script>
+    window.COAUTHOR_FORM_CONFIG = {
+      endpoint: "https://script.google.com/macros/s/AKfycbvyTjn593ARRQ83LHHXoprxlhn0LEd7RgKl3c7tePLXWsvq7SD1mLVlreWJ9PdB1SI/exec",
+      notifyEmail: "jahanaraym@vcu.edu"
+    };
+  </script>
+  <script src="./app.js"></script>
+</body>
+</html>
