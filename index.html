@@ -51,7 +51,7 @@
       <h2>Interested in Co-Authoring?</h2>
       <p class="collab-copy">If you want to join one of these projects as a co-author, select a project and tell me where you want to contribute.</p>
 
-      <form id="coauthor-form" class="coauthor-form" action="#" method="post">
+      <form id="coauthor-form" class="coauthor-form" action="https://script.google.com/macros/s/AKfycbvyTjn593ARRQ83LHHXoprxlhn0LEd7RgKl3c7tePLXWsvq7SD1mLVlreWJ9PdB1SI/exec" method="post" target="coauthor_submit_frame">
         <label for="project">Project</label>
         <select id="project" name="project" required>
           <option value="">Select a project</option>
@@ -77,9 +77,10 @@
       </form>
     </section>
   </main>
+  <iframe name="coauthor_submit_frame" style="display:none" aria-hidden="true"></iframe>
   <script>
     window.COAUTHOR_FORM_CONFIG = {
-      endpoint: https://script.google.com/macros/s/AKfycbx4qY-6UzUXwTWrRhrIJaI60quO4uLz6VXZ_e4jakk83HYNJIHSnAqwK_wtgm1z3mApuQ/exec,
+      endpoint: "https://script.google.com/macros/s/AKfycbvyTjn593ARRQ83LHHXoprxlhn0LEd7RgKl3c7tePLXWsvq7SD1mLVlreWJ9PdB1SI/exec",
       notifyEmail: "jahanaraym@vcu.edu"
     };
   </script>
